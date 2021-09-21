@@ -8,7 +8,7 @@ const eventSource = new EventSource(`http://localhost:8080/connect/${authToken}`
 
 function sseDivElement(data) {
   const sseDiv = document.createElement("div");
-  sseDiv.innerHTML = `id: ${data.id}, pushType: ${data.pushType}, createdAt: ${data.createdAt}`;
+  sseDiv.innerHTML = JSON.stringify(data);
   return sseDiv;
 }
 

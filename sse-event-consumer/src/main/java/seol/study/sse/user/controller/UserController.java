@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
-import seol.study.sse.user.dto.UserPushResponseDto;
-import seol.study.sse.user.service.UserPushService;
+import seol.study.sse.user.dto.UserEventResponseDto;
+import seol.study.sse.user.service.UserEventService;
 
 @Slf4j
 @CrossOrigin
@@ -17,11 +17,11 @@ import seol.study.sse.user.service.UserPushService;
 @RequiredArgsConstructor
 public class UserController {
 
-	private final UserPushService userPushService;
+	private final UserEventService userEventService;
 
 	@GetMapping(value = "/connect/{authToken}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-	public Flux<UserPushResponseDto> connect(@PathVariable String authToken) {
-		return userPushService.connect(authToken);
+	public Flux<UserEventResponseDto> connect(@PathVariable String authToken) {
+		return userEventService.connect(authToken);
 	}
-	
+
 }

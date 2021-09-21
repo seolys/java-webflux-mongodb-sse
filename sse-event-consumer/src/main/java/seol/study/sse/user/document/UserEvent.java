@@ -9,17 +9,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Builder
-@Document(collection = "userPush")
-public class UserPush {
+@Document(collection = "userEvent")
+public class UserEvent {
 
 	@Id
-	private String id; // PUSH ID
+	private String eventId; // 이벤트ID
 
 	private String userId; // 사용자ID
 
 	private String authToken; // 인증토큰
 
-	private PushType pushType; // 푸시 타입
+	private EventType eventType; // 푸시 타입
 
 	private LocalDateTime createdAt; // 생성시간
 

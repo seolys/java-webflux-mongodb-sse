@@ -18,17 +18,17 @@ use MARKETBOM2;
 show collections;
 
 # chat Collection 생성
-# db.userPush.drop()
-db.createCollection( "userPush", { capped: true, size: 10485760, max: 5000 } )
+# db.userEvent.drop()
+db.createCollection( "userEvent", { capped: true, size: 10485760, max: 5000 } )
 
 # Capped 되어 있는 확인 방법
-# db.userPush.isCapped()
+# db.userEvent.isCapped()
 
 # Capped이 되지 않는 collection을 capped으로 변경하는 방법
-#db.runCommand({convertToCapped: 'userPush', size: 10485760, max: 5000});
+#db.runCommand({convertToCapped: 'userEvent', size: 10485760, max: 5000});
 
 # 조회
-db.userPush.find();
-db.userPush.find().pretty();
+db.userEvent.find();
+db.userEvent.find().pretty();
 ```
 

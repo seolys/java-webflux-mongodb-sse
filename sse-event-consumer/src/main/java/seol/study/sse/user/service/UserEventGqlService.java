@@ -7,20 +7,20 @@ import org.reactivestreams.Publisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.scheduler.Schedulers;
-import seol.study.sse.user.gql.userpush.UserPush;
-import seol.study.sse.user.repository.UserPushRepository;
+import seol.study.sse.user.gql.userevent.UserEvent;
+import seol.study.sse.user.repository.UserEventRepository;
 
 @Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class UserPushGqlService {
+public class UserEventGqlService {
 
-	private final UserPushRepository userPushRepository;
+	private final UserEventRepository userEventRepository;
 
-	public Publisher<UserPush> userEvent(final String authToken) {
-		return userPushRepository.findByAuthTokenAndGreaterThanCreatedAt(authToken, LocalDateTime.now())
-				.map(UserPush::from)
+	public Publisher<UserEvent> userEvent(final String authToken) {
+		return userEventRepository.findByAuthTokenAndGreaterThanCreatedAt(authToken, LocalDateTime.now())
+				.map(UserEvent::from)
 				.subscribeOn(Schedulers.boundedElastic())
 				.log();
 	}

@@ -4,40 +4,44 @@ schema {
 }
 
 type Query {
+    health: String
 }
 
 type Subscription {
-    userEvent(authToken: String!): UserPush!
+    userEvent(authToken: String!): UserEvent!
 }
 
-union UserPushDetail = UserPushChangeAuthDetail | UserPushDuplicateLoginDetail | UserPushLogoutDetail | UserPushNullTestDetail
+union UserEventDetail = UserEventChangeAuthDetail
+    | UserEventDuplicateLoginDetail
+    | UserEventLogoutDetail
+#    | UserEventNullTestDetail
 
-type UserPush {
-    id: String!
-    pushType: PushType!
+type UserEvent {
+    eventId: String!
+    eventType: EventType!
     createdAt: String!
-    detail: UserPushDetail
+    detail: UserEventDetail
 }
 
-enum PushType {
+enum EventType {
     DUPLICATE_LOGIN
     LOGOUT
     CHANGE_AUTH
     NULL_TEST
 }
 
-type UserPushChangeAuthDetail {
+type UserEventChangeAuthDetail {
     changeAuthData: String
 }
 
-type UserPushDuplicateLoginDetail {
+type UserEventDuplicateLoginDetail {
     duplicateLoginData: String
 }
 
-type UserPushLogoutDetail {
+type UserEventLogoutDetail {
     logoutData: String
 }
 
-type UserPushNullTestDetail {
-
-}
+#type UserEventNullTestDetail {
+#    #    dummy: String
+#}

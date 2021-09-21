@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
-import seol.study.sse.user.document.PushType;
-import seol.study.sse.user.document.UserPush;
-import seol.study.sse.user.document.UserPushDetail;
-import seol.study.sse.user.dto.UserPushSaveRequestDto;
-import seol.study.sse.user.repository.UserPushRepository;
+import seol.study.sse.user.document.EventType;
+import seol.study.sse.user.document.UserEvent;
+import seol.study.sse.user.document.UserEventDetail;
+import seol.study.sse.user.dto.UserEventSaveRequestDto;
+import seol.study.sse.user.repository.UserEventRepository;
 
 @Slf4j
 @CrossOrigin
@@ -22,26 +22,26 @@ import seol.study.sse.user.repository.UserPushRepository;
 @RequiredArgsConstructor
 public class UserController {
 
-	private final UserPushRepository userPushRepository;
+	private final UserEventRepository userEventRepository;
 
 	@PostMapping(value = "/save")
-	public Mono<UserPush> save(@RequestBody UserPushSaveRequestDto request) {
+	public Mono<UserEvent> save(@RequestBody UserEventSaveRequestDto request) {
 		log.info("request={}", request);
-		UserPushDetail detail = detail(request.getPushType(), request.getDetail());
+		UserEventDetail detail = detail(request.getEventType(), request.getDetail());
 
-		UserPush userPush = UserPush.builder(
+		UserEvent userEvent = UserEvent.builder(
 				request.getUserId(),
 				request.getAuthToken(),
-				request.getPushType(),
+				request.getEventType(),
 				LocalDateTime.now(),
 				detail
 		)
 				.build();
-		return userPushRepository.save(userPush);
+		return userEventRepository.save(userEvent);
 	}
 
-	private UserPushDetail detail(final PushType pushType, final Map<String, Object> detail) {
-		return new ObjectMapper().convertValue(detail, pushType.getClazz());
+	private UserEventDetail detail(final EventType eventType, final Map<String, Object> detail) {
+		return new ObjectMapper().convertValue(detail, eventType.getClazz());
 	}
 
 }
