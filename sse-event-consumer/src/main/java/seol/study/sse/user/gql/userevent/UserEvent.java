@@ -28,7 +28,7 @@ public class UserEvent {
 
 	public static UserEvent from(seol.study.sse.user.document.UserEvent userEvent) {
 		return UserEvent.builder()
-				.eventId(userEvent.getId())
+				.eventId(userEvent.getEventId())
 				.eventType(userEvent.getEventType())
 				.createdAt(userEvent.getCreatedAt())
 				.detail(detail(userEvent.getEventType(), userEvent.getDetail()))
