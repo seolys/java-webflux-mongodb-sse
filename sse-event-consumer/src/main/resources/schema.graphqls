@@ -1,0 +1,43 @@
+schema {
+    query: Query
+    subscription: Subscription
+}
+
+type Query {
+}
+
+type Subscription {
+    userEvent(authToken: String!): UserPush!
+}
+
+union UserPushDetail = UserPushChangeAuthDetail | UserPushDuplicateLoginDetail | UserPushLogoutDetail | UserPushNullTestDetail
+
+type UserPush {
+    id: String!
+    pushType: PushType!
+    createdAt: String!
+    detail: UserPushDetail
+}
+
+enum PushType {
+    DUPLICATE_LOGIN
+    LOGOUT
+    CHANGE_AUTH
+    NULL_TEST
+}
+
+type UserPushChangeAuthDetail {
+    changeAuthData: String
+}
+
+type UserPushDuplicateLoginDetail {
+    duplicateLoginData: String
+}
+
+type UserPushLogoutDetail {
+    logoutData: String
+}
+
+type UserPushNullTestDetail {
+
+}
