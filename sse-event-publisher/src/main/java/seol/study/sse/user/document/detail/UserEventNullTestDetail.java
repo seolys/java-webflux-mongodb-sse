@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import seol.study.sse.user.document.UserPushDetail;
+import seol.study.sse.user.document.UserEventDetail;
 
 @Data
 @Builder
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserPushNullTestDetail implements UserPushDetail {
+public class UserEventNullTestDetail implements UserEventDetail {
 
 }

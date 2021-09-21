@@ -5,14 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import seol.study.sse.user.document.UserPushDetail;
+import seol.study.sse.user.document.UserEventDetail;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserPushChangeAuthDetail implements UserPushDetail {
+public class UserEventDuplicateLoginDetail implements UserEventDetail {
 
-	private String changeAuthData;
+	private String duplicateLoginData;
 }

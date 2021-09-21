@@ -5,13 +5,7 @@ while(!authToken) {
 }
 
 const eventSource = new EventSource(`http://localhost:8080/connect/${authToken}`);
-
-function sseDivElement(data) {
-  const sseDiv = document.createElement("div");
-  // sseDiv.innerHTML = `id: ${data.id}, pushType: ${data.pushType}, createdAt: ${data.createdAt}`;
-  sseDiv.innerHTML = JSON.stringify(data);
-  return sseDiv;
-}
+console.log("new EventSource");
 
 eventSource.onmessage = (event) => {
   const data = JSON.parse(event.data);
@@ -19,4 +13,10 @@ eventSource.onmessage = (event) => {
 
   const $sse = sseDivElement(data);
   document.querySelector("body").append($sse);
+}
+
+function sseDivElement(data) {
+  const sseDiv = document.createElement("div");
+  sseDiv.innerHTML = JSON.stringify(data);
+  return sseDiv;
 }

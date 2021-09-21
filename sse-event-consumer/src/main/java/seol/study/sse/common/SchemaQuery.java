@@ -8,4 +8,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class SchemaQuery implements GraphQLQueryResolver {
 
+	public String health() {
+		return "OK";
+	}
+
 }
