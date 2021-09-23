@@ -7,16 +7,37 @@ while(!authToken) {
 const eventSource = new EventSource(`http://localhost:8080/connect/${authToken}`);
 console.log("new EventSource");
 
+eventSource.onopen = () => {
+  console.log("Connection to server opened.");
+}
+
+function isLogout(eventType) {
+  return eventType === "DUPLICATE_LOGIN"
+      || eventType === "LOGOUT"
+      || eventType === "CHANGE_AUTH"
+      || eventType === "REDIS_TOKEN_EXPIRED";
+  // return eventType === "REDIS_TOKEN_EXPIRED";
+}
+
 eventSource.onmessage = (event) => {
   const data = JSON.parse(event.data);
   console.log("data:", data);
 
-  const $sse = sseDivElement(data);
-  document.querySelector("body").append($sse);
+  const $div = createDiv(data);
+  document.querySelector("body").append($div);
+
+  // if(isLogout(data.eventType)) {
+  //   eventSource.close();
+  // }
 }
 
-function sseDivElement(data) {
-  const sseDiv = document.createElement("div");
-  sseDiv.innerHTML = JSON.stringify(data);
-  return sseDiv;
+eventSource.onerror = function() {
+  console.log("EventSource failed.");
+  // eventSource.close();
+};
+
+function createDiv(data) {
+  const div = document.createElement("div");
+  div.innerHTML = JSON.stringify(data);
+  return div;
 }
