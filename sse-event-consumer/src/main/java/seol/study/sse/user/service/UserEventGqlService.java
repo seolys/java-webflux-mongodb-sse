@@ -19,7 +19,7 @@ public class UserEventGqlService {
 	private final UserEventRepository userEventRepository;
 
 	public Publisher<UserEvent> userEvent(final String authToken) {
-		return userEventRepository.findByAuthTokenAndGreaterThanCreatedAt(authToken, LocalDateTime.now())
+		return userEventRepository.findByAuthTokenAndGreaterThanCreatedAt("test", authToken, LocalDateTime.now())
 				.map(UserEvent::from)
 				.subscribeOn(Schedulers.boundedElastic())
 				.log();
