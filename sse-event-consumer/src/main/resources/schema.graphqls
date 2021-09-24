@@ -27,7 +27,7 @@ enum EventType {
     DUPLICATE_LOGIN
     LOGOUT
     CHANGE_AUTH
-    NULL_TEST
+    REDIS_TOKEN_EXPIRED
 }
 
 type UserEventChangeAuthDetail {

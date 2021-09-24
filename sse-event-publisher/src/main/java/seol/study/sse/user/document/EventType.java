@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import seol.study.sse.user.document.detail.UserEventChangeAuthDetail;
 import seol.study.sse.user.document.detail.UserEventDuplicateLoginDetail;
 import seol.study.sse.user.document.detail.UserEventLogoutDetail;
+import seol.study.sse.user.document.detail.UserEventRedisTokenExpiredDetail;
 
 @Getter
 @RequiredArgsConstructor
@@ -15,7 +16,7 @@ public enum EventType {
 	LOGOUT(UserEventLogoutDetail.class), // 정상 로그아웃
 	CHANGE_AUTH(UserEventChangeAuthDetail.class),
 	NULL_TEST(UserEventChangeAuthDetail.class),
-	;
+	REDIS_TOKEN_EXPIRED(UserEventRedisTokenExpiredDetail.class);;
 
 	private final Class<? extends UserEventDetail> clazz;
 

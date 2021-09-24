@@ -12,11 +12,11 @@ eventSource.onopen = () => {
 }
 
 function isLogout(eventType) {
-  return eventType === "DUPLICATE_LOGIN"
-      || eventType === "LOGOUT"
-      || eventType === "CHANGE_AUTH"
-      || eventType === "REDIS_TOKEN_EXPIRED";
-  // return eventType === "REDIS_TOKEN_EXPIRED";
+  // return eventType === "DUPLICATE_LOGIN"
+  //     || eventType === "LOGOUT"
+  //     || eventType === "CHANGE_AUTH"
+  //     || eventType === "REDIS_TOKEN_EXPIRED";
+  return eventType === "REDIS_TOKEN_EXPIRED";
 }
 
 eventSource.onmessage = (event) => {
@@ -26,9 +26,9 @@ eventSource.onmessage = (event) => {
   const $div = createDiv(data);
   document.querySelector("body").append($div);
 
-  // if(isLogout(data.eventType)) {
-  //   eventSource.close();
-  // }
+  if(isLogout(data.eventType)) {
+    eventSource.close();
+  }
 }
 
 eventSource.onerror = function() {

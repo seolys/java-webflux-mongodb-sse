@@ -21,7 +21,11 @@ public class UserEventService {
 	public Flux<UserEventResponseDto> connect(final String authToken) {
 		// TODO: Redis에 토큰 검증.
 
-		return userEventRepository.findByAuthTokenAndGreaterThanCreatedAt("test", authToken, LocalDateTime.now())
+		// TODO: 유효한 토큰이 아닐경우 에러처리
+
+		// 정상 토큰일때 응답
+		String userId = "test";
+		return userEventRepository.findByAuthTokenAndGreaterThanCreatedAt(userId, authToken, LocalDateTime.now())
 				.map(UserEventResponseDto::from)
 				.takeUntil(dto -> dto.getEventType().isLogout())
 				.subscribeOn(Schedulers.boundedElastic())
