@@ -16,7 +16,7 @@ function isLogout(eventType) {
   //     || eventType === "LOGOUT"
   //     || eventType === "CHANGE_AUTH"
   //     || eventType === "REDIS_TOKEN_EXPIRED";
-  return eventType === "REDIS_TOKEN_EXPIRED";
+  return eventType === "LOGOUT";
 }
 
 eventSource.onmessage = (event) => {
