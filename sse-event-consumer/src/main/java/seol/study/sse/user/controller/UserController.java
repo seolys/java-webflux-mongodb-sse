@@ -21,6 +21,7 @@ public class UserController {
 
 	@GetMapping(value = "/connect/{authToken}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public Flux<UserEventResponseDto> connect(@PathVariable String authToken) {
+		log.info("authToken = {}", authToken);
 		return userEventService.connect(authToken);
 	}
 
