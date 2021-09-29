@@ -1,5 +1,13 @@
 <script>
   const arr = ["a", "b", "c", "d", "e"];
+
+  for(const str of arr) {
+    document.write(
+      `<a href="./sse.html?authToken=${str}">/sse.html?authToken=${str}</a><br/>`
+    )
+  }
+  document.write("<hr>");
+
   for(const str of arr) {
     document.write(
       `<a href="http://localhost:8080/connect/${str}">http://localhost:8080/connect/${str}</a><br/>`
