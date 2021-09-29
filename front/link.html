@@ -1,0 +1,23 @@
+<script>
+  const arr = ["a", "b", "c", "d", "e"];
+  for(const str of arr) {
+    document.write(
+      `<a href="http://localhost:8080/connect/${str}">http://localhost:8080/connect/${str}</a><br/>`
+    )
+  }
+  document.write("<hr>");
+
+  for(const str of arr) {
+    document.write(
+      `<a href="http://localhost:8080/test_traffic/${str}">http://localhost:8080/test_traffic/${str}</a><br/>`
+    )
+  }
+  document.write("<hr>");
+
+  for(const str of arr) {
+    document.write(
+      `<a href="http://localhost:8080/test_interval/${str}">http://localhost:8080/test_interval/${str}</a><br/>`
+    )
+  }
+  document.write("<hr>");
+</script>
