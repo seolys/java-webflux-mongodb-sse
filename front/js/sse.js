@@ -23,8 +23,8 @@ eventSource.onmessage = (event) => {
   const data = JSON.parse(event.data);
   console.log("data:", data);
 
-  const $div = createDiv(data);
-  document.querySelector("body").append($div);
+  appendDiv(data);
+  scrollDown();
 
   if(isLogout(data.eventType)) {
     eventSource.close();
@@ -36,8 +36,12 @@ eventSource.onerror = function() {
   // eventSource.close();
 };
 
-function createDiv(data) {
+function appendDiv(data) {
   const div = document.createElement("div");
   div.innerHTML = JSON.stringify(data);
-  return div;
+  document.querySelector("body").append(div);
+}
+
+function scrollDown() {
+  document.body.scrollTop = document.body.scrollHeight;
 }
