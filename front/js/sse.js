@@ -1,14 +1,16 @@
-let authToken = null;
+const queryString = getQueryStringObject();
+
+let authToken = queryString["authToken"];
 while(!authToken) {
   authToken = prompt("토큰을 입력하세요.");
   document.querySelector("title").innerHTML = `sse(authToken = ${authToken})`;
 }
 
 const eventSource = new EventSource(`http://localhost:8080/connect/${authToken}`);
-console.log("new EventSource");
+appendDiv("new EventSource");
 
 eventSource.onopen = () => {
-  console.log("Connection to server opened.");
+  appendDiv("Connection to server opened.");
 }
 
 function isLogout(eventType) {
@@ -44,4 +46,21 @@ function appendDiv(data) {
 
 function scrollDown() {
   document.body.scrollTop = document.body.scrollHeight;
+}
+
+function getQueryStringObject() {
+  var a = window.location.search.substr(1).split('&');
+  if (a == "") {
+    return {};
+  }
+  var b = {};
+  for (var i = 0; i < a.length; ++i) {
+    var p = a[i].split('=', 2);
+    if (p.length == 1) {
+      b[p[0]] = "";
+    } else {
+      b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+  }
+  return b;
 }
