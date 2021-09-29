@@ -4,4 +4,6 @@ spring:
       host: localhost
       port: 27017
       database: MARKETBOM2
-
+#  main:
+#    #    web-application-type: NONE
+#    web-environment: false

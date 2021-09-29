@@ -15,6 +15,8 @@ public class UserEventResponseDto {
 
 	private String eventId; // event ID
 
+	private String userId;
+
 	private EventType eventType; // 푸시 타입
 
 	private LocalDateTime createdAt; // 생성시간
@@ -25,6 +27,7 @@ public class UserEventResponseDto {
 	public static UserEventResponseDto from(UserEvent userEvent) {
 		return UserEventResponseDto.builder()
 				.eventId(userEvent.getEventId())
+				.userId(userEvent.getUserId())
 				.eventType(userEvent.getEventType())
 				.createdAt(userEvent.getCreatedAt())
 				.detail(detail(userEvent.getEventType(), userEvent.getDetail()))
