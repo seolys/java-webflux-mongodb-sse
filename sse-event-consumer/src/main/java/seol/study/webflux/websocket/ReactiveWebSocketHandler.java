@@ -66,6 +66,9 @@ public class ReactiveWebSocketHandler implements WebSocketHandler {
 					if ("quit".equals(payloadAsText) || "exit".equals(payloadAsText)) {
 						return session.close(CloseStatus.NORMAL);
 					}
+
+					// 비즈니스로직
+
 					WebSocketMessage webSocketMessage = session.textMessage(payloadAsText + "응답");
 					return session.send(Mono.just(webSocketMessage));
 				})
